@@ -1,5 +1,9 @@
+import Board from "./components/Board"
+
 export default function Home() {
   return (
-    <div>Home Page</div>
+    <main>
+      <Board />
+    </main>
   )
 }

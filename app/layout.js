@@ -1,6 +1,7 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
 import Navbar from './components/Navbar'
+import Modal from './components/Modal'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,6 +16,7 @@ export default function RootLayout({ children }) {
       <body>
         <Navbar />
         {children}
+        <Modal />
       </body>
     </html>
   )
