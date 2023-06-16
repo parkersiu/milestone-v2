@@ -78,7 +78,6 @@ export default function Modal() {
                   className='w-full border border-gray-300 rounded-md outline-none p-5'
                   />
                 </div>
-                <TaskTypeRadioGroup />
                 <div className='mt-2'>
                   <button
                     type='button'
