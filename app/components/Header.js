@@ -4,9 +4,10 @@ import React from "react";
 import { MagnifyingGlassIcon, UserCircleIcon, Cog8ToothIcon } from '@heroicons/react/24/solid';
 import { useBoardStore } from "@/store/BoardStore";
 import { useModalStore } from "@/store/ModalStore";
+import { useProjectStore } from "@/store/ProjectStore";
 import { useEffect, useState } from "react";
 
-export default function Header() {
+export default function Header({ projectName }) {
 
   const [board, searchString, setSearchString] = useBoardStore((state) => [
     state.board,
@@ -35,7 +36,7 @@ export default function Header() {
         rounded-md filter blur-3xl opacity-50 -z-50"></div>
 
         <div className="flex items-center space-x-5 flex-1 justify-between w-full">
-          <h1 className="text-3xl font-bold">Project Name</h1>
+          <h1 className="text-3xl font-bold">{projectName}</h1>
           <div className="flex items-center justify-between">
             <form className="flex items-center space-x-5 bg-white rounded-md p-2 shadow-md
             flex-1 md:flex-initial">

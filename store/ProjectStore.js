@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { databases, ID } from '@/appwrite';
+import { getProjectFromDB } from '@/lib/getProjectFromDB';
 
 export const useProjectStore = create((set) => ({
   project: {
