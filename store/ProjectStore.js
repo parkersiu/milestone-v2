@@ -14,7 +14,7 @@ export const useProjectStore = create((set) => ({
   newProjectName: "",
   setNewProjectName: (input) => set({ newProjectName: input }),
   addProject: async(newProjectName) => {
-    const { $id } = await databases.createDocument(
+    const newProject = await databases.createDocument(
       process.env.NEXT_PUBLIC_DATABASE_ID,
       process.env.NEXT_PUBLIC_PROJECTS_COLLECTION_ID,
       ID.unique(),
@@ -25,6 +25,7 @@ export const useProjectStore = create((set) => ({
     );
 
     set({ newProjectName: "" });
-    console.log('project sent');
+
+    set({ project: newProject});
   },
 }))

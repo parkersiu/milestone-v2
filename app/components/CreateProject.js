@@ -2,28 +2,33 @@
 
 import { useProjectStore } from "@/store/ProjectStore";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 function CreateProject() {
 
-  const [newProjectName, setNewProjectName, addProject] = useProjectStore((state) => [
+  const [newProjectName, setNewProjectName, addProject, project] = useProjectStore((state) => [
     state.newProjectName,
     state.setNewProjectName,
     state.addProject,
+    state.project,
   ]);
+
+  const router = useRouter();
 
   const handleSubmit = (e => {
     e.preventDefault();
     if (!newProjectName) return;
     addProject(newProjectName);
+    router.push(`/projects/${project.id}`)
   });
-
-  console.log(newProjectName);
 
   return (
     <div className="mx-auto mt-6 text-center">
       <form onSubmit={handleSubmit}>
-        <div className='mt-2'>
-          Project Name
+        <div className='mt-2 block'>
+          <span className='block text-lg font-medium leading-6 text-gray-900 pb-2'>
+            Project Name:
+          </span>
           <input type='text'
           value={newProjectName}
           onChange={e => setNewProjectName(e.target.value)}

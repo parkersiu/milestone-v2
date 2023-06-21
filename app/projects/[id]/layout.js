@@ -1,16 +1,16 @@
-import Header from "../components/Header"
-import Modal from "../components/Modal"
-import SettingsModal from "../components/SettingsModal"
+import Header from "@/app/components/Header"
+import Modal from "@/app/components/Modal"
+import SettingsModal from "@/app/components/SettingsModal"
 
-export default function ProjectsLayout({
+export default function DynamicProjectsLayout({
   children,
 }) {
   return (
-    <main>
+    <>
       <Header />
       {children}
       <Modal />
       <SettingsModal />
-    </main>
+    </>
   )
 }
