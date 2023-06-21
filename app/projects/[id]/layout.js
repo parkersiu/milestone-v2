@@ -20,9 +20,9 @@ export default function DynamicProjectsLayout({
 
   useEffect(() => {
     getProject(params.id);
-  }, [params.id, getProject])
+  }, [params.id, getProject]);
 
- const projectName = project[0].name;
+  const projectName = project.name;
 
   return (
     <>

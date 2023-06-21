@@ -7,7 +7,7 @@ export const useBoardStore = create((set, get) => ({
   board: {
     columns: new Map()
   },
-  getBoard: async() => {
+  getBoard: async(projectId) => {
     /* temporarily storing project id in process.env variable */
     const board = await getTodosGroupedByColumn(process.env.NEXT_PUBLIC_PROJECT_ID);
     set({ board });
@@ -45,7 +45,7 @@ export const useBoardStore = create((set, get) => ({
       todo.$id
     );
   },
-  addTask: async(todo, columnId, image) => {
+  addTask: async(todo, columnId, image, projectId) => {
     let file;
     if (image) {
       const fileUploaded = await uploadImage(image);
@@ -64,6 +64,7 @@ export const useBoardStore = create((set, get) => ({
       {
         title: todo,
         status: columnId,
+        projectId,
         ...(file && { image: JSON.stringify(file) }),
       }
     );

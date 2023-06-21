@@ -5,7 +5,7 @@ import { getProjectFromDB } from '@/lib/getProjectFromDB';
 export const useProjectStore = create((set) => ({
   project: {
     name: '',
-    id: '',
+    $id: '',
     statuses: [],
   },
   getProject: async() => {

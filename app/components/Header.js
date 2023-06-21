@@ -36,7 +36,7 @@ export default function Header({ projectName }) {
         rounded-md filter blur-3xl opacity-50 -z-50"></div>
 
         <div className="flex items-center space-x-5 flex-1 justify-between w-full">
-          <h1 className="text-3xl font-bold">{projectName}</h1>
+          <h1 className="text-3xl font-bold">{projectName ? projectName : 'Project'}</h1>
           <div className="flex items-center justify-between">
             <form className="flex items-center space-x-5 bg-white rounded-md p-2 shadow-md
             flex-1 md:flex-initial">

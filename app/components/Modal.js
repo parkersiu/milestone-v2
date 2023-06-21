@@ -4,6 +4,7 @@ import { useState, Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { useModalStore } from '@/store/ModalStore';
 import { useBoardStore } from '@/store/BoardStore';
+import { useProjectStore } from '@/store/ProjectStore';
 import TaskTypeRadioGroup from './tasktyperadiogroup';
 import Image from 'next/image';
 import { PhotoIcon } from '@heroicons/react/24/solid';
@@ -26,10 +27,12 @@ export default function Modal() {
     state.closeModal,
   ]);
 
+  const [projectId] = useProjectStore((state) => [state.project.$id]);
+
   const handleSubmit = (e => {
     e.preventDefault();
     if (!newTaskInput) return;
-    addTask(newTaskInput, newTaskType, image);
+    addTask(newTaskInput, newTaskType, image, projectId);
     setImage(null)
     closeModal();
   })
