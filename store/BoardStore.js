@@ -8,7 +8,8 @@ export const useBoardStore = create((set, get) => ({
     columns: new Map()
   },
   getBoard: async() => {
-    const board = await getTodosGroupedByColumn();
+    /* temporarily storing project id in process.env variable */
+    const board = await getTodosGroupedByColumn(process.env.NEXT_PUBLIC_PROJECT_ID);
     set({ board });
   },
   setBoardState: (board) => set({ board }),

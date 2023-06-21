@@ -65,7 +65,7 @@ export default function Modal() {
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden
               rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
               >
-                <Dialog.Title className='text-lg font-mdeium leading-6 text-gray-900 pb-2'
+                <Dialog.Title className='text-lg font-medium leading-6 text-gray-900 pb-2'
                 >
                   Add a Task
                 </Dialog.Title>

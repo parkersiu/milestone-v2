@@ -1,8 +1,9 @@
 'use client'
 
 import React from "react";
-import { MagnifyingGlassIcon, UserCircleIcon } from '@heroicons/react/24/solid';
+import { MagnifyingGlassIcon, UserCircleIcon, Cog8ToothIcon } from '@heroicons/react/24/solid';
 import { useBoardStore } from "@/store/BoardStore";
+import { useModalStore } from "@/store/ModalStore";
 import { useEffect, useState } from "react";
 
 export default function Header() {
@@ -18,7 +19,13 @@ export default function Header() {
   useEffect(() => {
     if (board.columns.size === 0) return;
     setLoading(true);
-  }, [board])
+  }, [board]);
+
+  const openSettingsModal = useModalStore((state) => state.openSettingsModal);
+
+  const handleSettings = () => {
+    openSettingsModal();
+  }
 
 
   return(
@@ -29,18 +36,23 @@ export default function Header() {
 
         <div className="flex items-center space-x-5 flex-1 justify-between w-full">
           <h1 className="text-3xl font-bold">Project Name</h1>
-          <form className="flex items-center space-x-5 bg-white rounded-md p-2 shadow-md
-          flex-1 md:flex-initial">
-            <MagnifyingGlassIcon className="h-6 w-6 text-gray-400" />
-            <input
-            type="text"
-            placeholder="Search"
-            className="flex-1 outline-none p-2"
-            value={searchString}
-            onChange={e => setSearchString(e.target.value)}
-            />
-            <button hidden type="submit">Search</button>
-          </form>
+          <div className="flex items-center justify-between">
+            <form className="flex items-center space-x-5 bg-white rounded-md p-2 shadow-md
+            flex-1 md:flex-initial">
+              <MagnifyingGlassIcon className="h-6 w-6 text-gray-400" />
+              <input
+              type="text"
+              placeholder="Search"
+              className="flex-1 outline-none p-2"
+              value={searchString}
+              onChange={e => setSearchString(e.target.value)}
+              />
+              <button hidden type="submit">Search</button>
+            </form>
+            <button onClick={handleSettings}>
+              <Cog8ToothIcon className="h-6 w-6 m-1" />
+            </button>
+          </div>
         </div>
       </div>
 

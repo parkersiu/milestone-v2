@@ -3,21 +3,7 @@ import { PlusCircleIcon } from "@heroicons/react/24/solid";
 import TodoCard from "./todocard";
 import { useBoardStore } from "@/store/BoardStore";
 import { useModalStore } from "@/store/ModalStore";
-
-function convertString(str) {
-  const conversions = {
-    'todo': 'To Do',
-    'inprogress': 'In Progress',
-    'done': 'Done'
-  };
-
-  const lowercaseStr = str.toLowerCase();
-  if (lowercaseStr in conversions) {
-    return conversions[lowercaseStr];
-  }
-
-  return str;
-}
+import MutableInput from "./MutableInput";
 
 export default function Column({ id, todos, index }) {
 
@@ -50,12 +36,12 @@ export default function Column({ id, todos, index }) {
                 "bg-white/50"
               }`}
               >
-                <h2 className="flex justify-between font-bold text-xl p-2">{convertString(id)}
+                <MutableInput value={id}>
                 <span className="text-gray-500 bg-gray-200 rounded-full px-2 py-1 text-sm font-normal">
                   { !searchString ? todos.length :
                   todos.filter(todo => todo.title.toLowerCase().includes(searchString.toLowerCase())).length}
                 </span>
-                </h2>
+                </MutableInput>
                 <div className="space-y-2">
                   {todos.map((todo, index) => {
 
