@@ -3,9 +3,10 @@
 import { useState, Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { useModalStore } from '@/store/ModalStore';
+import { useProjectStore } from '@/store/ProjectStore';
 import TaskTypeRadioGroup from './tasktyperadiogroup';
 import Image from 'next/image';
-import { PhotoIcon, PencilIcon } from '@heroicons/react/24/solid';
+import { PencilIcon } from '@heroicons/react/24/solid';
 
 
 export default function SettingsModal() {
@@ -15,15 +16,30 @@ export default function SettingsModal() {
     state.closeSettingsModal,
   ]);
 
+  const [project, updateProjectInDB, setProjectState, projectNameInput, setProjectNameInput] = useProjectStore((state) => [
+    state.project,
+    state.updateProjectInDB,
+    state.setProjectState,
+    state.projectNameInput,
+    state.setProjectNameInput,
+  ]);
+
   const handleSubmit = (e => {
     e.preventDefault();
-    closeModal();
-  })
+    // send projectNameInput to db
+    updateProjectInDB(project.$id, projectNameInput);
+    // set return object as project
+    closeSettingsModal();
+  });
+
+  const handleClose = () => {
+    closeSettingsModal();
+    setProjectNameInput(project.name);
+  }
 
   return (
-    // Use the `Transition` component at the root level
     <Transition appear show={settingsIsOpen} as={Fragment}>
-      <Dialog as="form" className="relative z-10" onClose={closeSettingsModal} onSubmit={handleSubmit}>
+      <Dialog as="form" className="relative z-10" onClose={handleClose} onSubmit={handleSubmit}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -54,11 +70,24 @@ export default function SettingsModal() {
                   Project Settings
                 </Dialog.Title>
                 <div className='mt-2'>
-                  <input value="Project Name" className='w-full border border-gray-300 rounded-md outline-none p-5' />
+                  Project Name:
+                  <input value={projectNameInput} onChange={e => setProjectNameInput(e.target.value)} className='w-full border border-gray-300 rounded-md outline-none p-3 mt-2' />
                 </div>
                 <div className='flex items-center space-x-2'>
+                  {/* Render statuses using map */}
                   <p className=''>In Progress</p>
                   <PencilIcon className='w-4 h-4 inline' />
+                </div>
+                <div className='mt-4 flex justify-end'>
+                  <button
+                    type="submit"
+                    /* disabled={!newProjectName} */
+                    className='inline-flex justify-center rounded-md border border-transparent bg-blue-100
+                    px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none
+                    focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:bg-gray-100
+                    disabled:text-gray-300 disabled:cursor-not-allowed'>
+                    Save
+                  </button>
                 </div>
               </Dialog.Panel>
             </Transition.Child>

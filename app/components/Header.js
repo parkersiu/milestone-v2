@@ -15,6 +15,10 @@ export default function Header({ projectName }) {
     state.setSearchString,
   ]);
 
+  const [openSettingsModal] = useModalStore((state) => [state.openSettingsModal]);
+
+  const [setProjectNameInput] = useProjectStore((state) => [state.setProjectNameInput]);
+
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -22,9 +26,9 @@ export default function Header({ projectName }) {
     setLoading(true);
   }, [board]);
 
-  const openSettingsModal = useModalStore((state) => state.openSettingsModal);
 
   const handleSettings = () => {
+    setProjectNameInput(projectName);
     openSettingsModal();
   }
 

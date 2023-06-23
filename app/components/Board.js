@@ -5,7 +5,7 @@ import { useEffect } from "react"
 import { useBoardStore } from "@/store/BoardStore"
 import Column from "./column"
 
-export default function Board() {
+export default function Board({ projectId }) {
 
   const [board, getBoard, setBoardState, updateTodoInDB] = useBoardStore((state) => [
     state.board,
@@ -14,9 +14,10 @@ export default function Board() {
     state.updateTodoInDB,
   ]);
 
+
   useEffect(() => {
-    getBoard();
-  }, [getBoard]);
+    getBoard(projectId);
+  }, [getBoard, projectId]);
 
   const handleOnDragEnd = (result) => {
     const { destination, source, type } = result;

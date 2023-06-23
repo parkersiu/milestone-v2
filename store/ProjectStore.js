@@ -8,6 +8,7 @@ export const useProjectStore = create((set) => ({
     $id: '',
     statuses: [],
   },
+  setProjectState: (project) => set({ project }),
   getProject: async() => {
     const project = await getProjectFromDB();
     set({ project });
@@ -28,5 +29,19 @@ export const useProjectStore = create((set) => ({
     set({ newProjectName: "" });
 
     set({ project: newProject});
+  },
+  projectNameInput: "",
+  setProjectNameInput: (input) => set({ projectNameInput: input }),
+  updateProjectInDB: async(projectId, name, statuses) => {
+    const updatedProject = await databases.updateDocument(
+      process.env.NEXT_PUBLIC_DATABASE_ID,
+      process.env.NEXT_PUBLIC_PROJECTS_COLLECTION_ID,
+      projectId,
+      {
+        name,
+        statuses,
+      }
+    );
+    set({ project: updatedProject });
   },
 }))

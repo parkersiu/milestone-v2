@@ -22,6 +22,6 @@ export default function Page({ params }) {
   resetServerContext();
 
   return (
-      <Board />
+      <Board projectId={id} />
   )
 }
