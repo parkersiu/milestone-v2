@@ -6,7 +6,7 @@ import { useModalStore } from '@/store/ModalStore';
 import { useProjectStore } from '@/store/ProjectStore';
 import TaskTypeRadioGroup from './tasktyperadiogroup';
 import Image from 'next/image';
-import { PencilIcon } from '@heroicons/react/24/solid';
+import { XMarkIcon } from '@heroicons/react/24/solid';
 
 
 export default function SettingsModal() {
@@ -16,26 +16,35 @@ export default function SettingsModal() {
     state.closeSettingsModal,
   ]);
 
-  const [project, updateProjectInDB, setProjectState, projectNameInput, setProjectNameInput] = useProjectStore((state) => [
+  const [project, updateProjectInDB, setProjectState, projectNameInput, setProjectNameInput,
+    editedStatusArray, setEditedStatusArray] = useProjectStore((state) => [
     state.project,
     state.updateProjectInDB,
     state.setProjectState,
     state.projectNameInput,
     state.setProjectNameInput,
+    state.editedStatusArray,
+    state.setEditedStatusArray,
   ]);
 
   const handleSubmit = (e => {
     e.preventDefault();
-    // send projectNameInput to db
-    updateProjectInDB(project.$id, projectNameInput);
-    // set return object as project
+    updateProjectInDB(project.$id, projectNameInput, editedStatusArray);
     closeSettingsModal();
   });
 
   const handleClose = () => {
     closeSettingsModal();
     setProjectNameInput(project.name);
-  }
+    setEditedStatusArray(project.statuses);
+  };
+
+  const removeStatus = (status) => {
+    const statusArray = editedStatusArray.filter(item => item !== status);
+    setEditedStatusArray(statusArray);
+  };
+
+  const isButtonDisabled = (projectNameInput === project.name && project.statuses.length === editedStatusArray.length);
 
   return (
     <Transition appear show={settingsIsOpen} as={Fragment}>
@@ -71,17 +80,27 @@ export default function SettingsModal() {
                 </Dialog.Title>
                 <div className='mt-2'>
                   Project Name:
-                  <input value={projectNameInput} onChange={e => setProjectNameInput(e.target.value)} className='w-full border border-gray-300 rounded-md outline-none p-3 mt-2' />
+                  <input value={projectNameInput} onChange={e => setProjectNameInput(e.target.value)}
+                  className='w-full border border-gray-300 rounded-md outline-none p-3 mt-2' />
                 </div>
-                <div className='flex items-center space-x-2'>
+                <div className='mt-2 items-center'>
+                  Statuses:
                   {/* Render statuses using map */}
-                  <p className=''>In Progress</p>
-                  <PencilIcon className='w-4 h-4 inline' />
+                  {Array.from(editedStatusArray).map((status, index) => (
+                    <div key={status} className=''>
+                      <p className='inline'>
+                        {status}
+                      </p>
+                      <button type="button" id={status} index={index} onClick={e => removeStatus(status)} >
+                        <XMarkIcon className='w-4 h-4 inline cursor-pointer' />
+                      </button>
+                    </div>
+                  ))}
                 </div>
                 <div className='mt-4 flex justify-end'>
                   <button
                     type="submit"
-                    /* disabled={!newProjectName} */
+                    disabled={isButtonDisabled}
                     className='inline-flex justify-center rounded-md border border-transparent bg-blue-100
                     px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none
                     focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:bg-gray-100

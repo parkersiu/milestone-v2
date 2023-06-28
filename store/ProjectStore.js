@@ -44,4 +44,6 @@ export const useProjectStore = create((set) => ({
     );
     set({ project: updatedProject });
   },
-}))
+  editedStatusArray: [],
+  setEditedStatusArray: (input) => set({ editedStatusArray: [...input] }),
+}));

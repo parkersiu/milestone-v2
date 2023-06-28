@@ -14,7 +14,6 @@ export default function Board({ projectId }) {
     state.updateTodoInDB,
   ]);
 
-
   useEffect(() => {
     getBoard(projectId);
   }, [getBoard, projectId]);
@@ -34,12 +33,15 @@ export default function Board({ projectId }) {
       setBoardState({
         ...board, columns: rearrangedColumns,
       });
+      return;
     }
 
     // convert indexes from numbers to ids
     const columns = Array.from(board.columns);
     const startColIndex = columns[Number(source.droppableId)];
     const finishColIndex = columns[Number(destination.droppableId)];
+    console.log('source:', source);
+    console.log('destination', destination);
 
     const startCol = {
       id: startColIndex[0],

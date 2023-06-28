@@ -17,14 +17,20 @@ export default function Header({ projectName }) {
 
   const [openSettingsModal] = useModalStore((state) => [state.openSettingsModal]);
 
-  const [setProjectNameInput] = useProjectStore((state) => [state.setProjectNameInput]);
+  const [project, setProjectNameInput, editedStatusArray, setEditedStatusArray] = useProjectStore((state) => [
+    state.project,
+    state.setProjectNameInput,
+    state.editedStatusArray,
+    state.setEditedStatusArray,
+  ]);
 
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (board.columns.size === 0) return;
     setLoading(true);
-  }, [board]);
+    setEditedStatusArray(project.statuses);
+  }, [board, project.statuses, setEditedStatusArray]);
 
 
   const handleSettings = () => {
