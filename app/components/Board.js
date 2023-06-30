@@ -4,6 +4,7 @@ import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd"
 import { useEffect } from "react"
 import { useBoardStore } from "@/store/BoardStore"
 import Column from "./column"
+import NewPopover from "./NewPopover"
 
 export default function Board({ projectId }) {
 
@@ -40,8 +41,6 @@ export default function Board({ projectId }) {
     const columns = Array.from(board.columns);
     const startColIndex = columns[Number(source.droppableId)];
     const finishColIndex = columns[Number(destination.droppableId)];
-    console.log('source:', source);
-    console.log('destination', destination);
 
     const startCol = {
       id: startColIndex[0],
@@ -114,8 +113,9 @@ export default function Board({ projectId }) {
             index={index}
             />
             ))}
-          </div>)
-            }
+            <NewPopover />
+          </div>
+          )}
         </Droppable>
       </DragDropContext>
     </div>

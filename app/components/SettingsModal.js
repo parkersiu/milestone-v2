@@ -6,7 +6,7 @@ import { useModalStore } from '@/store/ModalStore';
 import { useProjectStore } from '@/store/ProjectStore';
 import TaskTypeRadioGroup from './tasktyperadiogroup';
 import Image from 'next/image';
-import { XMarkIcon } from '@heroicons/react/24/solid';
+import { XMarkIcon, PlusIcon } from '@heroicons/react/24/outline';
 
 
 export default function SettingsModal() {
@@ -85,13 +85,12 @@ export default function SettingsModal() {
                 </div>
                 <div className='mt-2 items-center'>
                   Statuses:
-                  {/* Render statuses using map */}
                   {Array.from(editedStatusArray).map((status, index) => (
                     <div key={status} className=''>
                       <p className='inline'>
                         {status}
                       </p>
-                      <button type="button" id={status} index={index} onClick={e => removeStatus(status)} >
+                      <button type="button" id={status} index={index} onClick={e => removeStatus(status)}>
                         <XMarkIcon className='w-4 h-4 inline cursor-pointer' />
                       </button>
                     </div>
