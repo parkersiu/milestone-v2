@@ -4,6 +4,7 @@ import { useState, Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { useModalStore } from '@/store/ModalStore';
 import { useBoardStore } from '@/store/BoardStore';
+import { useProjectStore } from '@/store/ProjectStore';
 import TaskTypeRadioGroup from './tasktyperadiogroup';
 import Image from 'next/image';
 import { PhotoIcon } from '@heroicons/react/24/solid';
@@ -26,10 +27,12 @@ export default function Modal() {
     state.closeModal,
   ]);
 
+  const [projectId] = useProjectStore((state) => [state.project.$id]);
+
   const handleSubmit = (e => {
     e.preventDefault();
     if (!newTaskInput) return;
-    addTask(newTaskInput, newTaskType, image);
+    addTask(newTaskInput, newTaskType, image, projectId);
     setImage(null)
     closeModal();
   })
@@ -65,7 +68,7 @@ export default function Modal() {
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden
               rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
               >
-                <Dialog.Title className='text-lg font-mdeium leading-6 text-gray-900 pb-2'
+                <Dialog.Title className='text-lg font-medium leading-6 text-gray-900 pb-2'
                 >
                   Add a Task
                 </Dialog.Title>
@@ -78,7 +81,6 @@ export default function Modal() {
                   className='w-full border border-gray-300 rounded-md outline-none p-5'
                   />
                 </div>
-                <TaskTypeRadioGroup />
                 <div className='mt-2'>
                   <button
                     type='button'

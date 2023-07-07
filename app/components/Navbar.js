@@ -7,7 +7,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
   { name: 'Home', href: '/', current: true },
-  { name: 'Projects', href: '#', current: false },
+  { name: 'Projects', href: '/projects', current: false },
 ]
 
 function classNames(...classes) {
@@ -16,7 +16,7 @@ function classNames(...classes) {
 
 export default function Navbar() {
   return (
-    <Disclosure as="nav" className="bg-white border-b border-gray-900/10">
+    <Disclosure as="nav" className="bg-blue-400/50 border-b border-gray-900/10 p-1">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -43,7 +43,7 @@ export default function Navbar() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-900 hover:border',
+                          item.current ? 'bg-gray-900 text-white' : 'text-gray-900 hover:bg-gray-800 hover:text-white',
                           'rounded-md px-3 py-2 text-sm font-medium'
                         )}
                         aria-current={item.current ? 'page' : undefined}

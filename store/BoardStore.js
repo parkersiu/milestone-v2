@@ -7,8 +7,8 @@ export const useBoardStore = create((set, get) => ({
   board: {
     columns: new Map()
   },
-  getBoard: async() => {
-    const board = await getTodosGroupedByColumn();
+  getBoard: async(projectId) => {
+    const board = await getTodosGroupedByColumn(projectId);
     set({ board });
   },
   setBoardState: (board) => set({ board }),
@@ -44,7 +44,7 @@ export const useBoardStore = create((set, get) => ({
       todo.$id
     );
   },
-  addTask: async(todo, columnId, image) => {
+  addTask: async(todo, columnId, image, projectId) => {
     let file;
     if (image) {
       const fileUploaded = await uploadImage(image);
@@ -63,6 +63,7 @@ export const useBoardStore = create((set, get) => ({
       {
         title: todo,
         status: columnId,
+        projectId,
         ...(file && { image: JSON.stringify(file) }),
       }
     );
@@ -96,6 +97,5 @@ export const useBoardStore = create((set, get) => ({
         }
       }
     })
-
-  }
+  },
 }))

@@ -4,8 +4,9 @@ import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd"
 import { useEffect } from "react"
 import { useBoardStore } from "@/store/BoardStore"
 import Column from "./column"
+import NewPopover from "./NewPopover"
 
-export default function Board() {
+export default function Board({ projectId }) {
 
   const [board, getBoard, setBoardState, updateTodoInDB] = useBoardStore((state) => [
     state.board,
@@ -15,8 +16,8 @@ export default function Board() {
   ]);
 
   useEffect(() => {
-    getBoard();
-  }, [getBoard]);
+    getBoard(projectId);
+  }, [getBoard, projectId]);
 
   const handleOnDragEnd = (result) => {
     const { destination, source, type } = result;
@@ -33,6 +34,7 @@ export default function Board() {
       setBoardState({
         ...board, columns: rearrangedColumns,
       });
+      return;
     }
 
     // convert indexes from numbers to ids
@@ -111,8 +113,9 @@ export default function Board() {
             index={index}
             />
             ))}
-          </div>)
-            }
+            <NewPopover />
+          </div>
+          )}
         </Droppable>
       </DragDropContext>
     </div>
