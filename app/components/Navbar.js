@@ -16,7 +16,7 @@ function classNames(...classes) {
 
 export default function Navbar() {
   return (
-    <Disclosure as="nav" className="bg-blue-400/50 border-b border-gray-900/10 p-1">
+    <Disclosure as="nav" className="border-b border-gray-900/10 p-1">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -34,7 +34,7 @@ export default function Navbar() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <span className='text-black text-lg'>Milestone</span>
+                  <span className='text-black text-3xl'>Milestone</span>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
@@ -43,8 +43,8 @@ export default function Navbar() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-900 hover:bg-gray-800 hover:text-white',
-                          'rounded-md px-3 py-2 text-sm font-medium'
+                          item.current ? 'text-gray-900' : 'text-gray-900',
+                          'px-3 py-2 text-sm font-medium border-b-2 border-white hover:border-indigo-200'
                         )}
                         aria-current={item.current ? 'page' : undefined}
                       >

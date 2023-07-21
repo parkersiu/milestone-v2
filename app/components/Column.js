@@ -33,7 +33,7 @@ export default function Column({ id, todos, index }) {
               ref={provided.innerRef}
               className={`pb-2 p-2 rounded-2xl shadow-sm ${
                 snapshot.isDraggingOver ? "bg-green-200" :
-                "bg-white/50"
+                "bg-slate-300/50"
               }`}
               >
                 <MutableInput value={id}>
