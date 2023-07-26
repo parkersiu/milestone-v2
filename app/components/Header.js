@@ -41,10 +41,7 @@ export default function Header({ projectName }) {
 
   return(
     <header>
-      <div className="flex flex-col md:flex-row items-center p-3 bg-blue-500/10 rounded-b-2xl">
-        <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-br from-blue-400 to-[#0055D1]
-        rounded-md filter blur-3xl opacity-50 -z-50"></div>
-
+      <div className="flex flex-col bg-slate-300/50 md:flex-row items-center p-3">
         <div className="flex items-center space-x-5 flex-1 justify-between w-full">
           <h1 className="text-3xl font-bold">{projectName ? projectName : 'Project'}</h1>
           <div className="flex items-center justify-between">
