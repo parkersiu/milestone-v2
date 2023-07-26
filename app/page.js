@@ -13,12 +13,12 @@ export default function Home() {
       <div className="relative overflow-hidden bg-white">
         <div className="pb-80 pt-16 sm:pb-40 sm:pt-24">
           <div className="flex flex-col justify-center mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
-            <div className="mx-auto sm:max-w-lg">
+            <div className="mx-auto sm:max-w-lg text-center">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
                 Welcome to Milestone
               </h1>
               <p className="mt-4 text-xl text-gray-500">
-                A full stack application designed for users to manage a project.
+                An application designed for managing tasks
               </p>
             </div>
             <div className="mx-auto">
