@@ -27,8 +27,6 @@ export default function Page() {
     }));
     setProjects([...projects, ...mappedResult]);
     setProjectsLength(result.total);
-    console.log(result);
-    console.log(projects);
   }
 
   useEffect(() => {

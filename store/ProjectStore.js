@@ -9,8 +9,8 @@ export const useProjectStore = create((set) => ({
     statuses: [],
   },
   setProjectState: (project) => set({ project }),
-  getProject: async() => {
-    const project = await getProjectFromDB();
+  getProject: async(id) => {
+    const project = await getProjectFromDB(id);
     set({ project });
   },
   newProjectName: "",
