@@ -27,7 +27,6 @@ export const useProjectStore = create((set) => ({
     );
 
     set({ newProjectName: "" });
-
     set({ project: newProject});
   },
   projectNameInput: "",

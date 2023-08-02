@@ -25,11 +25,11 @@ export default function DynamicProjectsLayout({
   const projectName = project.name;
 
   return (
-    <div className="">
+    <>
       <Header projectName={projectName} />
       {children}
       <Modal />
       <SettingsModal />
-    </div>
+    </>
   )
 }
